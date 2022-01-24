@@ -14,6 +14,7 @@ library(kableExtra)
 library(highcharter)
 library(ggplot2)
 library(tidyverse)
+library(reshape2)
 
 port <- Sys.getenv('PORT')
 
