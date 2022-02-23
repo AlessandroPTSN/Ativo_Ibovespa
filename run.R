@@ -15,6 +15,7 @@ library(highcharter)
 library(ggplot2)
 library(tidyverse)
 library(reshape2)
+library(DT)
 
 port <- Sys.getenv('PORT')
 
