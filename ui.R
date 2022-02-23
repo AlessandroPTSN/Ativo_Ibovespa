@@ -18,6 +18,7 @@ library(highcharter)
 library(ggplot2)
 library(tidyverse)
 library(reshape2)
+library(DT)
 ##########################
 ### obtencao dos dados ###
 ##########################
