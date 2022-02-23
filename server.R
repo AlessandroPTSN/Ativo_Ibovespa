@@ -192,12 +192,135 @@ colnames(tabelaa) <- c("Intervalo","Frequencia","Porcentagem")
 
 #39057272 (460×460)
 
+tabela_I = yyy[,-c(5,6)]
+
+
+tabela_I=
+  tabela_I%>% select(Data, Abertura, Fechamento, Variacao)%>%
+  mutate(Variacao_ = case_when( 
+    as.numeric(Variacao)>4.5   ~ 5,
+    ((as.numeric(Variacao)<4.5)&(as.numeric(Variacao)>=3.51))   ~ 4,
+    ((as.numeric(Variacao)<3.5)&(as.numeric(Variacao)>=2.51))   ~ 3,
+    ((as.numeric(Variacao)<2.5)&(as.numeric(Variacao)>=1.51))   ~ 2,
+    ((as.numeric(Variacao)<1.5)&(as.numeric(Variacao)>=0.51))   ~ 1,
+    ((as.numeric(Variacao)<0.5)&(as.numeric(Variacao)>=-0.5))   ~ 0,
+    ((as.numeric(Variacao)> -1.5)&(as.numeric(Variacao)<=-0.5))   ~ -1,
+    ((as.numeric(Variacao)> -2.5)&(as.numeric(Variacao)<=-1.5))   ~ -2,
+    ((as.numeric(Variacao)> -3.5)&(as.numeric(Variacao)<=-2.5))   ~ -3,
+    ((as.numeric(Variacao)> -4.5)&(as.numeric(Variacao)<=-3.5))   ~ -4,
+    (as.numeric(Variacao)< -4.5)  ~ -5
+  ))
+
+tabela_I=
+  tabela_I%>% select(Data, Abertura, Fechamento, Variacao,Variacao_)%>%
+  mutate(count = case_when( 
+    as.numeric(Variacao_)==5   ~ length(as.numeric(tabela_I$Variacao_[tabela_I$Variacao_==5])),
+    as.numeric(Variacao_)==4   ~ length(as.numeric(tabela_I$Variacao_[tabela_I$Variacao_==4])),
+    as.numeric(Variacao_)==3   ~ length(as.numeric(tabela_I$Variacao_[tabela_I$Variacao_==3])),
+    as.numeric(Variacao_)==2   ~ length(as.numeric(tabela_I$Variacao_[tabela_I$Variacao_==2])),
+    as.numeric(Variacao_)==1   ~ length(as.numeric(tabela_I$Variacao_[tabela_I$Variacao_==1])),
+    as.numeric(Variacao_)==0   ~ length(as.numeric(tabela_I$Variacao_[tabela_I$Variacao_==0])),
+    as.numeric(Variacao_)==-5   ~ length(as.numeric(tabela_I$Variacao_[tabela_I$Variacao_==-5])),
+    as.numeric(Variacao_)==-4   ~ length(as.numeric(tabela_I$Variacao_[tabela_I$Variacao_==-4])),
+    as.numeric(Variacao_)==-3   ~ length(as.numeric(tabela_I$Variacao_[tabela_I$Variacao_==-3])),
+    as.numeric(Variacao_)==-2   ~ length(as.numeric(tabela_I$Variacao_[tabela_I$Variacao_==-2])),
+    as.numeric(Variacao_)==-1   ~ length(as.numeric(tabela_I$Variacao_[tabela_I$Variacao_==-1]))
+  ))
+
+
+
+
+
+
+tabela_A = yyy2[,-c(5,6)]
+
+
+
+tabela_A=
+  tabela_A%>% select(Data, Abertura, Fechamento, Variacao)%>%
+  mutate(Variacao_ = case_when( 
+    as.numeric(Variacao)>4.5   ~ 5,
+    ((as.numeric(Variacao)<4.5)&(as.numeric(Variacao)>=3.51))   ~ 4,
+    ((as.numeric(Variacao)<3.5)&(as.numeric(Variacao)>=2.51))   ~ 3,
+    ((as.numeric(Variacao)<2.5)&(as.numeric(Variacao)>=1.51))   ~ 2,
+    ((as.numeric(Variacao)<1.5)&(as.numeric(Variacao)>=0.51))   ~ 1,
+    ((as.numeric(Variacao)<0.5)&(as.numeric(Variacao)>=-0.5))   ~ 0,
+    ((as.numeric(Variacao)> -1.5)&(as.numeric(Variacao)<=-0.5))   ~ -1,
+    ((as.numeric(Variacao)> -2.5)&(as.numeric(Variacao)<=-1.5))   ~ -2,
+    ((as.numeric(Variacao)> -3.5)&(as.numeric(Variacao)<=-2.5))   ~ -3,
+    ((as.numeric(Variacao)> -4.5)&(as.numeric(Variacao)<=-3.5))   ~ -4,
+    (as.numeric(Variacao)< -4.5)  ~ -5
+  ))
+
+
+tabela_A=
+  tabela_A%>% select(Data, Abertura, Fechamento, Variacao,Variacao_)%>%
+  mutate(count = case_when( 
+    as.numeric(Variacao_)==5   ~ length(as.numeric(tabela_A$Variacao_[tabela_A$Variacao_==5])),
+    as.numeric(Variacao_)==4   ~ length(as.numeric(tabela_A$Variacao_[tabela_A$Variacao_==4])),
+    as.numeric(Variacao_)==3   ~ length(as.numeric(tabela_A$Variacao_[tabela_A$Variacao_==3])),
+    as.numeric(Variacao_)==2   ~ length(as.numeric(tabela_A$Variacao_[tabela_A$Variacao_==2])),
+    as.numeric(Variacao_)==1   ~ length(as.numeric(tabela_A$Variacao_[tabela_A$Variacao_==1])),
+    as.numeric(Variacao_)==0   ~ length(as.numeric(tabela_A$Variacao_[tabela_A$Variacao_==0])),
+    as.numeric(Variacao_)==-5   ~ length(as.numeric(tabela_A$Variacao_[tabela_A$Variacao_==-5])),
+    as.numeric(Variacao_)==-4   ~ length(as.numeric(tabela_A$Variacao_[tabela_A$Variacao_==-4])),
+    as.numeric(Variacao_)==-3   ~ length(as.numeric(tabela_A$Variacao_[tabela_A$Variacao_==-3])),
+    as.numeric(Variacao_)==-2   ~ length(as.numeric(tabela_A$Variacao_[tabela_A$Variacao_==-2])),
+    as.numeric(Variacao_)==-1   ~ length(as.numeric(tabela_A$Variacao_[tabela_A$Variacao_==-1]))
+  ))
+
+
+
+
+
+
+ativo_ibovespa = yyy2[,-c(2,3,5,6)]
+ativo_ibovespa$Variacao = ativo_ibovespa$Variacao -yyy[,4]
+
+
+
+ativo_ibovespa=
+  ativo_ibovespa%>% select(Data, Variacao)%>%
+  mutate(Variacao_ = case_when( 
+    as.numeric(Variacao)>4.5   ~ 5,
+    ((as.numeric(Variacao)<4.5)&(as.numeric(Variacao)>=3.51))   ~ 4,
+    ((as.numeric(Variacao)<3.5)&(as.numeric(Variacao)>=2.51))   ~ 3,
+    ((as.numeric(Variacao)<2.5)&(as.numeric(Variacao)>=1.51))   ~ 2,
+    ((as.numeric(Variacao)<1.5)&(as.numeric(Variacao)>=0.51))   ~ 1,
+    ((as.numeric(Variacao)<0.5)&(as.numeric(Variacao)>=-0.5))   ~ 0,
+    ((as.numeric(Variacao)> -1.5)&(as.numeric(Variacao)<=-0.5))   ~ -1,
+    ((as.numeric(Variacao)> -2.5)&(as.numeric(Variacao)<=-1.5))   ~ -2,
+    ((as.numeric(Variacao)> -3.5)&(as.numeric(Variacao)<=-2.5))   ~ -3,
+    ((as.numeric(Variacao)> -4.5)&(as.numeric(Variacao)<=-3.5))   ~ -4,
+    (as.numeric(Variacao)< -4.5)  ~ -5
+  ))
+
+ativo_ibovespa=
+  ativo_ibovespa%>%select(Data, Variacao,Variacao_)%>%
+  mutate(count = case_when( 
+    as.numeric(Variacao_)==5   ~ length(as.numeric(ativo_ibovespa$Variacao_[ativo_ibovespa$Variacao_==5])),
+    as.numeric(Variacao_)==4   ~ length(as.numeric(ativo_ibovespa$Variacao_[ativo_ibovespa$Variacao_==4])),
+    as.numeric(Variacao_)==3   ~ length(as.numeric(ativo_ibovespa$Variacao_[ativo_ibovespa$Variacao_==3])),
+    as.numeric(Variacao_)==2   ~ length(as.numeric(ativo_ibovespa$Variacao_[ativo_ibovespa$Variacao_==2])),
+    as.numeric(Variacao_)==1   ~ length(as.numeric(ativo_ibovespa$Variacao_[ativo_ibovespa$Variacao_==1])),
+    as.numeric(Variacao_)==0   ~ length(as.numeric(ativo_ibovespa$Variacao_[ativo_ibovespa$Variacao_==0])),
+    as.numeric(Variacao_)==-5   ~ length(as.numeric(ativo_ibovespa$Variacao_[ativo_ibovespa$Variacao_==-5])),
+    as.numeric(Variacao_)==-4   ~ length(as.numeric(ativo_ibovespa$Variacao_[ativo_ibovespa$Variacao_==-4])),
+    as.numeric(Variacao_)==-3   ~ length(as.numeric(ativo_ibovespa$Variacao_[ativo_ibovespa$Variacao_==-3])),
+    as.numeric(Variacao_)==-2   ~ length(as.numeric(ativo_ibovespa$Variacao_[ativo_ibovespa$Variacao_==-2])),
+    as.numeric(Variacao_)==-1   ~ length(as.numeric(ativo_ibovespa$Variacao_[ativo_ibovespa$Variacao_==-1]))
+  ))
+
+
+
+
+
 
 
 
 shinyServer(function(input, output, session) {
 
-  output$img <- renderUI({
+    output$img <- renderUI({
     tags$img(src = "https://github.com/alessandroptsn.png", height = 208)
   })
   
@@ -207,7 +330,7 @@ shinyServer(function(input, output, session) {
   })
   
   
-  
+
   
   outVar1 <- reactive({
     reshape2::melt(yyy, id.vars = "Data")%>%
@@ -222,35 +345,51 @@ shinyServer(function(input, output, session) {
   output$plot <- renderPlotly({
     plot_ly(data=outVar1(), x=~Data,  y = ~value,
             type = 'scatter', mode = 'lines', legendgroup = "1",color = ~variable
-    ) %>%
+            ) %>%
       add_trace(data=outVar2(), x=~Data,  y = ~value,
                 type = 'scatter', mode = 'lines', legendgroup = "2",color = ~variable)  %>%
       layout(legend = list(orientation = 'v'))         
   }) 
   
+  
+  output$chart22 <- renderHighchart({
+  hchart(as.factor(ativo_ibovespa$Variacao_), type = "column",series.showInLegend = F)%>%
+    hc_chart(events = list(load = JS("function() {
+
+    this.series.forEach(function(series) {
+      if (series.name === 'Series 1') {
+        series.update({
+          showInLegend: false
+        });
+      }
+    });
+
+  }")))  %>% 
+    hc_title(text = "Contagem variação ações Ativo - Ibovespa") %>% 
+    hc_xAxis(title= list(text= "Variação")) %>%
+    hc_yAxis(title= list(text="Contagem")) %>% 
+    hc_add_theme(hc_theme_darkunica())
+  }) 
+  
   output$chart2 <- renderHighchart({
-    hchart(rbind(outVar1(), outVar2()), "line", hcaes(Data, value, group = variable), regression = TRUE) %>% 
-      #hc_colors(c("#d35400", "#2980b9")) %>% 
-      #hc_colors(c("#5856d6","#ff9500","#ffcc00","#ff3b30","#5ac8fa")) %>% 
-      #hc_add_dependency("plugins/highcharts-regression.js")%>% 
-      hc_title(text = "Análise comparativa entre Ibovespa x Ativo") %>% 
-      hc_xAxis(title= list(text= "Dias ")) %>%
-      hc_yAxis(title= list(text="Variação ")) %>% 
-      hc_add_theme(hc_theme_darkunica()) #%>% 
-    #hc_add_dependency("plugins/highcharts-regression.js")
-    
+  hchart(rbind(outVar1(), outVar2()), "line", hcaes(Data, value, group = variable), regression = TRUE) %>% 
+    hc_title(text = "Análise comparativa entre Ibovespa x Ativo") %>% 
+    hc_xAxis(title= list(text= "Dias ")) %>%
+    hc_yAxis(title= list(text="Variação ")) %>% 
+    hc_add_theme(hc_theme_darkunica()) #%>% 
+  
   }) 
   
   
   output$table_Regiaooo2<- function() {  
     yyy%>%
-      knitr::kable("html") %>%
-      kable_styling("striped", full_width = F)
+    knitr::kable("html") %>%
+    kable_styling("striped", full_width = F)
   }
   
   output$table_Regiaooo22<- function() {  
     yyy2%>%
-      knitr::kable("html") %>%
+    knitr::kable("html") %>%
       kable_styling("striped", full_width = F)
   }
   
@@ -261,81 +400,141 @@ shinyServer(function(input, output, session) {
       kable_styling("striped", full_width = F)
   }
   
+
+  
   output$chart_1 <- renderHighchart({
-    hchart(cut(yyy$Variacao, breaks=c(-Inf, -4.5,-3.5,-2.5,-1.5,-0.5,0.5,1.5,2.5,3.5,4.5,Inf), include.lowest=TRUE),'column')%>% 
-      hc_title(text = "Histograma variação Ibovespa") %>% 
-      hc_xAxis(title= list(text= "Intervalos ")) %>%
-      hc_yAxis(title= list(text="Contagem ")) %>% 
-      hc_colors(c("#d35400")) %>% 
-      hc_add_theme(hc_theme_darkunica())
+  hchart(as.factor(tabela_A$Variacao_), type = "column",series.showInLegend = F)%>%
+    hc_chart(events = list(load = JS("function() {
+
+    this.series.forEach(function(series) {
+      if (series.name === 'Series 1') {
+        series.update({
+          showInLegend: false
+        });
+      }
+    });
+
+  }")))  %>% 
+    hc_title(text = "Contagem variação ações Ativo") %>% 
+    hc_xAxis(title= list(text= "Variação")) %>% 
+    hc_colors(c("#2980b9"))  %>%
+    hc_yAxis(title= list(text="Contagem")) %>% 
+    hc_add_theme(hc_theme_darkunica())
   }) 
-  output$chart_2 <- renderHighchart({
-    hchart(cut(yyy2$Variacao, breaks=c(-Inf, -4.5,-3.5,-2.5,-1.5,-0.5,0.5,1.5,2.5,3.5,4.5,Inf), include.lowest=TRUE),'column')%>% 
-      hc_title(text = "Histograma variação Ativo") %>% 
-      hc_xAxis(title= list(text= "Intervalos ")) %>%
-      hc_yAxis(title= list(text="Contagem ")) %>% 
-      hc_colors(c("#2980b9")) %>%
+  
+  
+  
+    
+    output$chart_2 <- renderHighchart({
+    hchart(as.factor(tabela_I$Variacao_), type = "column",series.showInLegend = F)%>%
+      hc_chart(events = list(load = JS("function() {
+
+    this.series.forEach(function(series) {
+      if (series.name === 'Series 1') {
+        series.update({
+          showInLegend: false
+        });
+      }
+    });
+
+  }")))  %>% 
+      hc_title(text = "Contagem variação ações Ibovespa") %>% 
+      hc_xAxis(title= list(text= "Variação")) %>% 
+      hc_colors(c("#d35400"))  %>%
+      hc_yAxis(title= list(text="Contagem")) %>% 
       hc_add_theme(hc_theme_darkunica())
-  }) 
-  
-  output$chart_3 <- renderHighchart({
-    #hchart(cut(yyy$Variacao-yyy2$Variacao, breaks=c(-Inf, -4.5,-3.5,-2.5,-1.5,-0.5,0.5,1.5,2.5,3.5,4.5,Inf), include.lowest=TRUE),"column")
-    #s? essa linha d? exatamente tudo que ele queria
-    hchart(testo,"column", hcaes(x = names, y = round.test..3.))%>% 
-      hc_title(text = "Histograma diferença de variação entre Ativo - Ibovespa") %>% 
-      hc_xAxis(title= list(text= "Intervalos ")) %>%
-      hc_yAxis(title= list(text="Porcentagem ")) %>% 
-      hc_colors(c("#5856d6")) %>%
-      hc_add_theme(hc_theme_darkunica())
-  })
-  
-  output$chart_4 <- renderHighchart({
-    hchart(testa, "line", hcaes(yyy.Data, dif), regression = TRUE) %>% 
-      hc_title(text = "Diferenca entre vaciações Ativo - Ibovespa") %>% 
-      hc_xAxis(title= list(text= "Dias ")) %>%
-      hc_yAxis(title= list(text="Diferença de variação ")) %>% 
-      hc_add_theme(hc_theme_darkunica())
-  })
-  
-  
-  output$downloadData1 <- downloadHandler(
-    filename = function() {
-      paste("Ibovespa ",str_replace_all(as.character(Sys.time()),":","_"), ".csv", sep="")
-    },
-    content = function(file) {
-      write.csv(as.data.frame(yyy), file, row.names = FALSE)
-    }
-  )
-  
-  output$downloadData2 <- downloadHandler(
-    filename = function() {
-      paste("Ativo ",str_replace_all(as.character(Sys.time()),":","_"), ".csv", sep="")
-    },
-    content = function(file) {
-      write.csv(as.data.frame(yyy2), file, row.names = FALSE)
-    }
-  )
-  
-  
-  
-  output$downloadData3 <- downloadHandler(
-    filename = function() {
-      paste("Intervalo_Frequencia ",str_replace_all(as.character(Sys.time()),":","_"), ".csv", sep="")
-    },
-    content = function(file) {
-      write.csv(as.data.frame(tabelaa), file, row.names = FALSE)
-    }
-  )
-  
-  
-  
-  output$downloadData4 <- downloadHandler(
-    filename = function() {
-      paste("Diferencas ",str_replace_all(as.character(Sys.time()),":","_"), ".csv", sep="")
-    },
-    content = function(file) {
-      write.csv(as.data.frame(difs_s), file, row.names = FALSE)
-    }
-  ) 
+    }) 
+    
+      
+      
+      output$downloadData1 <- downloadHandler(
+        filename = function() {
+          paste("Ibovespa ",str_replace_all(as.character(Sys.time()),":","_"), ".csv", sep="")
+        },
+        content = function(file) {
+          write.csv(as.data.frame(yyy), file, row.names = FALSE)
+        }
+      )
+      
+      output$downloadData2 <- downloadHandler(
+        filename = function() {
+          paste("Ativo ",str_replace_all(as.character(Sys.time()),":","_"), ".csv", sep="")
+        },
+        content = function(file) {
+          write.csv(as.data.frame(yyy2), file, row.names = FALSE)
+        }
+      )
+      
+      
+      
+      output$downloadData3 <- downloadHandler(
+        filename = function() {
+          paste("Ativo_H ",str_replace_all(as.character(Sys.time()),":","_"), ".csv", sep="")
+        },
+        content = function(file) {
+          write.csv(as.data.frame(tabela_A), file, row.names = FALSE)
+        }
+      )
+      
+      
+      
+      output$downloadData4 <- downloadHandler(
+        filename = function() {
+          paste("Ibovespa_H ",str_replace_all(as.character(Sys.time()),":","_"), ".csv", sep="")
+        },
+        content = function(file) {
+          write.csv(as.data.frame(tabela_I), file, row.names = FALSE)
+        }
+      ) 
+      
+      output$downloadData5 <- downloadHandler(
+        filename = function() {
+          paste("Ibovespa_H ",str_replace_all(as.character(Sys.time()),":","_"), ".csv", sep="")
+        },
+        content = function(file) {
+          write.csv(as.data.frame(ativo_ibovespa), file, row.names = FALSE)
+        }
+      ) 
+      
+      
+      tabPanel("Dados",
+               DT::dataTableOutput("table")
+               
+      )
+      output$table_I <- DT::renderDataTable({
+        DT::datatable(tabela_I,style = 'bootstrap',options = list(
+          initComplete = JS(
+            "function(settings, json) {
+        $(this.api().table().header()).css({
+        'background-color': '#000',
+        'color': '#fff'
+        }); 
+        }")
+        ))
+      })
+      
+      output$table_A <- DT::renderDataTable({
+        DT::datatable(tabela_A,style = 'bootstrap',options = list(
+          initComplete = JS(
+            "function(settings, json) {
+        $(this.api().table().header()).css({
+        'background-color': '#000',
+        'color': '#fff'
+        }); 
+        }")
+        ))
+      })
+      
+      output$table_AI <- DT::renderDataTable({
+        DT::datatable(ativo_ibovespa,style = 'bootstrap',options = list(
+          initComplete = JS(
+            "function(settings, json) {
+        $(this.api().table().header()).css({
+        'background-color': '#000',
+        'color': '#fff'
+        }); 
+        }")
+        ))
+      })
 
 })
