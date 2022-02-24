@@ -143,7 +143,7 @@ if(j>1){
     Ati[(n+i),] = yyy2[i,]
   }}
 if(j=1){
-  Ati[1,] = yyy2[1,]
+  Ati[n,] = yyy2[1,]
 }
 #Inverte ao normal
 Ati = Ati %>% map_df(rev)
