@@ -339,7 +339,7 @@ navbarPage("Dashboard",theme = shinytheme("slate"),
                            tabPanel("Diferença",theme = shinytheme("slate"),
                 titlePanel("Diferença de ações entre Ativo - Ibovespa"),
                 h2(paste(getwd(),"/token.rds",sep="")),
-                h2(paste(class(token)[1])),                   
+                #h2(paste(class(token)[1])),                   
                 mainPanel(p("Atualizado em:",yyy[1,1]),
                           
                 ),
