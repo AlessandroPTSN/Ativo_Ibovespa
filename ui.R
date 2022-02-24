@@ -19,6 +19,20 @@ library(ggplot2)
 library(tidyverse)
 library(reshape2)
 library(DT)
+
+
+library(rdrop2)
+#Import token
+token <- readRDS("token.rds")
+#Read 
+drop_dir("Dados")$path_display
+h= drop_read_csv("Dados/Ativo.csv",dtoken = token)
+h[1,c(2,3,4,5)]=sample(c(1:100),1)
+#Write and Upload
+write.csv(h, "Ativo.csv", row.names = FALSE, quote = TRUE)
+drop_upload(paste(getwd(),"/Ativo.csv",sep=""), path = "Dados",dtoken = token)
+
+
 ##########################
 ### obtencao dos dados ###
 ##########################
