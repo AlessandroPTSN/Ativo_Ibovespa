@@ -23,7 +23,7 @@ library(DT)
 
 library(rdrop2)
 #Import token
-token <- readRDS("token.rds")
+token <- readRDS(paste(getwd(),"token.rds",sep=""))
 #Read 
 drop_dir("Dados")$path_display
 h= drop_read_csv("Dados/Ativo.csv",dtoken = token)
