@@ -24,13 +24,13 @@ library(DT)
 library(rdrop2)
 
 #Import token
-token <- readRDS("token.rds")
+token <- readRDS("/app/token.rds")
 #Read 
 h= drop_read_csv("Dados/Ativo.csv",dtoken = token)
 h[1,c(2,3,4,5)]=32423
 #Write and Upload
-write.csv(h, "Ativo.csv", row.names = FALSE, quote = TRUE)
-drop_upload("Ativo.csv", path = "Dados",dtoken = token)
+write.csv(h,"/app/Ativo.csv", row.names = FALSE, quote = TRUE)
+drop_upload("/app/Ativo.csv", path = "Dados",dtoken = token)
 
 
 ##########################
@@ -338,7 +338,6 @@ navbarPage("Dashboard",theme = shinytheme("slate"),
            
                            tabPanel("Diferença",theme = shinytheme("slate"),
                 titlePanel("Diferença de ações entre Ativo - Ibovespa"),   
-                h2(paste(getwd(),"/Ativo.csv",sep="")),
                 mainPanel(p("Atualizado em:",yyy[1,1]),
                           
                 ),
