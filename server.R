@@ -91,70 +91,68 @@ colnames(yyy2) <- c("Data","Abertura","Fechamento","Variacao","Minimo","Maximo")
 yyy2 = yyy2[-20,]
 
 
-Ibo = read.csv("/app/Ibo.csv")
+#Ibo = read.csv("/app/Ibo.csv")
 #yyy = novo
 #Ibo = antigo
 #Inverte
-m = length(Ibo[,1])
-Ibo
-Ibo = Ibo %>% map_df(rev)
-Ibo = as.data.frame(Ibo)
-Ibo$Data=as.Date(Ibo$Data)
-j=1
-while(Ibo[j,1] != yyy[1,1]){
-  j=j+1
-}
-#Adiciona novas celulas
-if(j>1){
-for(i in 1:(j-1)){
-  Ibo[(m+i),] = yyy[j-i+1,]
-}}
-if(j=1){
-  Ibo[m,] = yyy[1,]
-}
+#m = length(Ibo[,1])
+#Ibo = Ibo %>% map_df(rev)
+#Ibo = as.data.frame(Ibo)
+#Ibo$Data=as.Date(Ibo$Data)
+#j=1
+#while(Ibo[j,1] != yyy[1,1]){
+#  j=j+1
+#}
+##Adiciona novas celulas
+#if(j>1){
+#for(i in 1:(j-1)){
+#  Ibo[(m+i),] = yyy[j-i+1,]
+#}}
+#if(j=1){
+#  Ibo[m,] = yyy[1,]
+#}
 #Inverte ao normal
-Ibo = Ibo %>% map_df(rev)
-Ibo = as.data.frame(Ibo)
-Ibo$Data=as.Date(Ibo$Data)
-#Apaga demais celulas extras
-Ibo = Ibo[-c(n+j-1),]
-write.csv(Ibo, "/app/Ibo.csv", row.names = FALSE, quote = TRUE)
+#Ibo = Ibo %>% map_df(rev)
+#Ibo = as.data.frame(Ibo)
+#Ibo$Data=as.Date(Ibo$Data)
+##Apaga demais celulas extras
+#Ibo = Ibo[-c(n+j-1),]
+#write.csv(Ibo, "/app/Ibo.csv", row.names = FALSE, quote = TRUE)
 
 
 
 
-Ati = read.csv("/app/Ati.csv")
-#yyy2 = novo
-#Ati = antigo
-#Inverte
-n = length(Ati[,1])
-Ati
-Ati = Ati %>% map_df(rev)
-Ati = as.data.frame(Ati)
-Ati$Data=as.Date(Ati$Data)
-j=1
-while(Ati[j,1] != yyy2[1,1]){
-  j=j+1
-}
-#Adiciona novas celulas
-if(j>1){
-  for(i in 1:(j-1)){
-    Ati[(n+i),] = yyy2[j-i+1,]
-  }}
-if(j=1){
-  Ati[n,] = yyy2[1,]
-}
-#Inverte ao normal
-Ati = Ati %>% map_df(rev)
-Ati = as.data.frame(Ati)
-Ati$Data=as.Date(Ati$Data)
-#Apaga demais celulas extras
-Ati = Ati[-c(n+j-1),]
-write.csv(Ati, "/app/Ati.csv", row.names = FALSE, quote = TRUE)
+#Ati = read.csv("/app/Ati.csv")
+##yyy2 = novo
+##Ati = antigo
+##Inverte
+#n = length(Ati[,1])
+#Ati = Ati %>% map_df(rev)
+#Ati = as.data.frame(Ati)
+#Ati$Data=as.Date(Ati$Data)
+#j=1
+#while(Ati[j,1] != yyy2[1,1]){
+#  j=j+1
+#}
+##Adiciona novas celulas
+#if(j>1){
+#  for(i in 1:(j-1)){
+#    Ati[(n+i),] = yyy2[j-i+1,]
+#  }}
+#if(j=1){
+#  Ati[n,] = yyy2[1,]
+#}
+##Inverte ao normal
+#Ati = Ati %>% map_df(rev)
+#Ati = as.data.frame(Ati)
+#Ati$Data=as.Date(Ati$Data)
+##Apaga demais celulas extras
+#Ati = Ati[-c(n+j-1),]
+#write.csv(Ati, "/app/Ati.csv", row.names = FALSE, quote = TRUE)
 
 
-yyy2=Ati
-yyy=Ibo
+#yyy2=Ati
+#yyy=Ibo
 
 
 
