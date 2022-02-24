@@ -18,7 +18,7 @@ library(DT)
 
 library(rdrop2)
 #Import token
-token <- readRDS(paste(getwd(),"token.rds",sep=""))
+#token <- readRDS(paste(getwd(),"token.rds",sep=""))
 #Read 
 #h= drop_read_csv("Dados/Ativo.csv",dtoken = token)
 #h[1,c(2,3,4,5)]=sample(c(1:100),1)
