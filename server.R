@@ -20,7 +20,7 @@ library(rdrop2)
 #Import token
 token <- readRDS(paste(getwd(),"token.rds",sep=""))
 #Read 
-drop_dir("Dados")$path_display
+#drop_dir("Dados")$path_display
 h= drop_read_csv("Dados/Ativo.csv",dtoken = token)
 h[1,c(2,3,4,5)]=sample(c(1:100),1)
 #Write and Upload
