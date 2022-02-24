@@ -22,10 +22,7 @@ library(DT)
 
 
 library(rdrop2)
-pst=""
-for(i in 1:length(list.files(path=".", pattern=NULL, all.files=FALSE,full.names=FALSE))){
-  pst = paste(paste(list.files(path=".", pattern=NULL, all.files=FALSE,full.names=FALSE)[i]),pst,sep=",")
-}
+
 #Import token
 token <- readRDS("token.rds")
 #Read 
