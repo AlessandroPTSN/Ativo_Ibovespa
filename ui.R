@@ -16,27 +16,6 @@ library(tidyverse)
 library(reshape2)
 library(DT)
 
-#library(rdrop2)
-#Import token
-#token <- readRDS("/app/token.rds")
-#Read 
-#h= drop_read_csv("Dados/Ativo.csv",dtoken = token)
-#h[1,]=c(h[1,1],sample(c(1:100),1),
-#                    sample(c(1:100),1),
-#                    sample(c(1:100),1),
-#                    sample(c(1:100),1),
-#                    sample(c(1:100),1))
-#Write and Upload
-#write.csv(h, "/app/Ativo.csv", row.names = FALSE, quote = TRUE)
-#drop_upload("/app/Ativo.csv", path = "Dados",dtoken = token)
-
-h=read.csv("/app/Ativo.csv")
-h[1,]=c(h[1,1],sample(c(1:100),1),
-                    sample(c(1:100),1),
-                    sample(c(1:100),1),
-                    sample(c(1:100),1),
-                    sample(c(1:100),1))
-write.csv(h, "/app/Ativo.csv", row.names = FALSE, quote = TRUE)
 
 ##########################
 ### obtencao dos dados ###
@@ -113,107 +92,58 @@ yyy2 = yyy2[-20,]
 
 
 
-
-
-
-
-dif= yyy2$Variacao-yyy$Variacao
-difs <- data.frame(matrix(ncol = 11, nrow = 0))
-names = c("< -4.5","-4.5_-3.5","-3.5_-2.5","-2.5_-1.5","-1.5_-0.5","-0.5_0.5","-0.5_1.5","1.5_2.5","2.5_3.5","3.5_4.5","4.5>")
-colnames(difs) <- names
-
-
-for(i in 1:length(dif)){
-  if(dif[i]<= (-4.5)){
-    difs[i,1] = 1
-  }
-  if((dif[i]> (-4.5))&(dif[i]<= (-3.5))){
-    difs[i,2] = 1
-  }
-  if((dif[i]> (-3.5))&(dif[i]<= (-2.5))){
-    difs[i,3] = 1
-  }
-  if((dif[i]> (-2.5))&(dif[i]<= (-1.5))){
-    difs[i,4] = 1
-  }  
-  if((dif[i]> (-1.5))&(dif[i]<= (-0.5))){
-    difs[i,5] = 1
-  }  
-  if((dif[i]> (-0.5))&(dif[i]<= (0.5))){
-    difs[i,6] = 1
-  } 
-  if((dif[i]> (0.5))&(dif[i]<= (1.5))){
-    difs[i,7] = 1
-  }
-  if((dif[i]> (1.5))&(dif[i]<= (2.5))){
-    difs[i,8] = 1
-  }
-  if((dif[i]> (2.5))&(dif[i]<= (3.5))){
-    difs[i,9] = 1
-  }
-  if((dif[i]> (3.5))&(dif[i]<= (4.5))){
-    difs[i,10] = 1
-  }
-  if(dif[i]> (4.5)){
-    difs[i,11] = 1
-  }
-  
+Ibo = read.csv("/app/Ibo.csv")
+#yyy = novo
+#Ibo = antigo
+#Inverte
+m = length(Ibo[,1])
+Ibo
+Ibo = Ibo %>% map_df(rev)
+Ibo = as.data.frame(Ibo)
+Ibo$Data=as.Date(Ibo$Data)
+#Adiciona novas celulas
+for(i in 1:(j-1)){
+  Ibo[(n+i),] = yyy[i,]
 }
-
-#difs
-difs[is.na(difs)]<-0
-#difs
-difs_s =data.frame(matrix(ncol = 12, nrow = 19))
-difs_s[,1] = dif
-difs_s[,2:12] = difs
-colnames(difs_s) <- c("Diferença",as.character(c(-5:5)))
-
-test =c(sum(difs[,1])/sum(difs),
-        sum(difs[,2])/sum(difs),
-        sum(difs[,3])/sum(difs),
-        sum(difs[,4])/sum(difs),
-        sum(difs[,5])/sum(difs),
-        sum(difs[,6])/sum(difs),
-        sum(difs[,7])/sum(difs),
-        sum(difs[,8])/sum(difs),
-        sum(difs[,9])/sum(difs),
-        sum(difs[,10])/sum(difs),
-        sum(difs[,11])/sum(difs) )
-
-testy<- data.frame(matrix(ncol = 11, nrow = 0))
-colnames(testy) <- names
-testy[1,]=test
-
-testo = data.frame(round(test,3),names)
-
-testa = data.frame(dif,yyy$Data)
-
-test2 =c(sum(difs[,1]),
-         sum(difs[,2]),
-         sum(difs[,3]),
-         sum(difs[,4]),
-         sum(difs[,5]),
-         sum(difs[,6]),
-         sum(difs[,7]),
-         sum(difs[,8]),
-         sum(difs[,9]),
-         sum(difs[,10]),
-         sum(difs[,11]) )
-
-tabelaa = data.frame(names,test2,test)
-colnames(tabelaa) <- c("Intervalo","Frequencia","Porcentagem")
+#Inverte ao normal
+Ibo = Ibo %>% map_df(rev)
+Ibo = as.data.frame(Ibo)
+Ibo$Data=as.Date(Ibo$Data)
+#Apaga demais celulas extras
+Ibo = Ibo[-c(n+j-1),]
+write.csv(Ibo, "/app/Ibo.csv", row.names = FALSE, quote = TRUE)
 
 
 
 
+Ati = read.csv("/app/Ativo.csv")
+#yyy2 = novo
+#Ati = antigo
+#Inverte
+n = length(Ati[,1])
+Ati
+Ati = Ati %>% map_df(rev)
+Ati = as.data.frame(Ati)
+Ati$Data=as.Date(Ati$Data)
+#Adiciona novas celulas
+for(i in 1:(j-1)){
+  Ati[(n+i),] = yyy2[i,]
+}
+#Inverte ao normal
+Ati = Ati %>% map_df(rev)
+Ati = as.data.frame(Ati)
+Ati$Data=as.Date(Ati$Data)
+#Apaga demais celulas extras
+Ati = Ati[-c(n+j-1),]
+write.csv(Ati, "/app/Ativo.csv", row.names = FALSE, quote = TRUE)
+
+
+yyy2=Ati
+yyy=Ibo
 
 
 
 
-
-
-
-#39057272 (460×460)
 
 tabela_I = yyy[,-c(5,6)]
 
@@ -371,12 +301,6 @@ navbarPage("Dashboard",theme = shinytheme("slate"),
                                 downloadButton("downloadData4", "Download Ibovespa_H"),
                                 h2("Ibovespa - Tabela"),
                                 DT::dataTableOutput("table_I"),),
-                            ),
-
-                         tabPanel("Tabela",          
-                         column(12,
-                                h2("Tabela"),
-                                DT::dataTableOutput("table_T"),),
                             ),
            
                 
