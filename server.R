@@ -22,7 +22,11 @@ library(rdrop2)
 token <- readRDS("/app/token.rds")
 #Read 
 h= drop_read_csv("Dados/Ativo.csv",dtoken = token)
-h[1,c(2,3,4,5)]=sample(c(1:100),1)
+h[1,]=c(h[1,1],sample(c(1:100),1),
+                    sample(c(1:100),1),
+                    sample(c(1:100),1),
+                    sample(c(1:100),1),
+                    sample(c(1:100),1))
 #Write and Upload
 write.csv(h, "/app/Ativo.csv", row.names = FALSE, quote = TRUE)
 drop_upload("/app/Ativo.csv", path = "Dados",dtoken = token)
