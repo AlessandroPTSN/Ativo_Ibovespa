@@ -22,6 +22,10 @@ library(DT)
 
 
 library(rdrop2)
+pst=""
+for(i in 1:length(list.files(path=".", pattern=NULL, all.files=FALSE,full.names=FALSE))){
+  pst = paste(paste(list.files(path=".", pattern=NULL, all.files=FALSE,full.names=FALSE)[i]),pst,sep=",")
+}
 #Import token
 #token <- readRDS(paste(getwd(),"token.rds",sep=""))
 #Read 
@@ -338,8 +342,7 @@ navbarPage("Dashboard",theme = shinytheme("slate"),
            
                            tabPanel("Diferença",theme = shinytheme("slate"),
                 titlePanel("Diferença de ações entre Ativo - Ibovespa"),
-                h2(paste(getwd(),"/token.rds",sep="")),
-                #h2(paste(class(token)[1])),                   
+                h2(pst),                 
                 mainPanel(p("Atualizado em:",yyy[1,1]),
                           
                 ),
