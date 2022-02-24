@@ -17,18 +17,15 @@ library(reshape2)
 library(DT)
 
 library(rdrop2)
-pst=""
-for(i in 1:length(list.files(path=".", pattern=NULL, all.files=FALSE,full.names=FALSE))){
-  pst = paste(paste(list.files(path=".", pattern=NULL, all.files=FALSE,full.names=FALSE)[i]),pst,sep=",")
-}
+
 #Import token
-#token <- readRDS(paste(getwd(),"token.rds",sep=""))
+token <- readRDS("token.rds")
 #Read 
-#h= drop_read_csv("Dados/Ativo.csv",dtoken = token)
-#h[1,c(2,3,4,5)]=sample(c(1:100),1)
+h= drop_read_csv("Dados/Ativo.csv",dtoken = token)
+h[1,c(2,3,4,5)]=sample(c(1:100),1)
 #Write and Upload
-#write.csv(h, "Ativo.csv", row.names = FALSE, quote = TRUE)
-#drop_upload(paste(getwd(),"/Ativo.csv",sep=""), path = "Dados",dtoken = token)
+write.csv(h, "Ativo.csv", row.names = FALSE, quote = TRUE)
+drop_upload(paste(getwd(),"/Ativo.csv",sep=""), path = "Dados",dtoken = token)
 
 ##########################
 ### obtencao dos dados ###
