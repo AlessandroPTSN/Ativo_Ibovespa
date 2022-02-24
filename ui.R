@@ -124,7 +124,7 @@ write.csv(Ibo, "/app/Ibo.csv", row.names = FALSE, quote = TRUE)
 
 
 
-Ati = read.csv("/app/Ativo.csv")
+Ati = read.csv("/app/Ati.csv")
 #yyy2 = novo
 #Ati = antigo
 #Inverte
@@ -151,7 +151,7 @@ Ati = as.data.frame(Ati)
 Ati$Data=as.Date(Ati$Data)
 #Apaga demais celulas extras
 Ati = Ati[-c(n+j-1),]
-write.csv(Ati, "/app/Ativo.csv", row.names = FALSE, quote = TRUE)
+write.csv(Ati, "/app/Ati.csv", row.names = FALSE, quote = TRUE)
 
 
 yyy2=Ati
