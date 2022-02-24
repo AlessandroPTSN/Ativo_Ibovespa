@@ -16,6 +16,7 @@ library(ggplot2)
 library(tidyverse)
 library(reshape2)
 library(DT)
+library(rdrop2)
 
 port <- Sys.getenv('PORT')
 
