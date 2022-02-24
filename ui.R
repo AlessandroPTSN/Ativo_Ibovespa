@@ -101,9 +101,17 @@ Ibo
 Ibo = Ibo %>% map_df(rev)
 Ibo = as.data.frame(Ibo)
 Ibo$Data=as.Date(Ibo$Data)
+j=1
+while(Ibo[j,1] != yyy[1,1]){
+  j=j+1
+}
 #Adiciona novas celulas
+if(j>1){
 for(i in 1:(j-1)){
   Ibo[(n+i),] = yyy[i,]
+}}
+if(j=1){
+  Ibo[1,] = yyy[1,]
 }
 #Inverte ao normal
 Ibo = Ibo %>% map_df(rev)
@@ -125,9 +133,17 @@ Ati
 Ati = Ati %>% map_df(rev)
 Ati = as.data.frame(Ati)
 Ati$Data=as.Date(Ati$Data)
+j=1
+while(Ati[j,1] != yyy2[1,1]){
+  j=j+1
+}
 #Adiciona novas celulas
-for(i in 1:(j-1)){
-  Ati[(n+i),] = yyy2[i,]
+if(j>1){
+  for(i in 1:(j-1)){
+    Ati[(n+i),] = yyy2[i,]
+  }}
+if(j=1){
+  Ati[1,] = yyy2[1,]
 }
 #Inverte ao normal
 Ati = Ati %>% map_df(rev)
