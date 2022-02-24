@@ -107,10 +107,10 @@ while(Ibo[j,1] != yyy[1,1]){
 #Adiciona novas celulas
 if(j>1){
 for(i in 1:(j-1)){
-  Ibo[(n+i),] = yyy[i,]
+  Ibo[(m+i),] = yyy[j-i+1,]
 }}
 if(j=1){
-  Ibo[n,] = yyy[1,]
+  Ibo[m,] = yyy[1,]
 }
 #Inverte ao normal
 Ibo = Ibo %>% map_df(rev)
@@ -139,7 +139,7 @@ while(Ati[j,1] != yyy2[1,1]){
 #Adiciona novas celulas
 if(j>1){
   for(i in 1:(j-1)){
-    Ati[(n+i),] = yyy2[i,]
+    Ati[(n+i),] = yyy2[j-i+1,]
   }}
 if(j=1){
   Ati[n,] = yyy2[1,]
