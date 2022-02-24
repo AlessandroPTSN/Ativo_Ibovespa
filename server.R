@@ -16,20 +16,27 @@ library(tidyverse)
 library(reshape2)
 library(DT)
 
-library(rdrop2)
-
+#library(rdrop2)
 #Import token
-token <- readRDS("/app/token.rds")
+#token <- readRDS("/app/token.rds")
 #Read 
-h= drop_read_csv("Dados/Ativo.csv",dtoken = token)
+#h= drop_read_csv("Dados/Ativo.csv",dtoken = token)
+#h[1,]=c(h[1,1],sample(c(1:100),1),
+#                    sample(c(1:100),1),
+#                    sample(c(1:100),1),
+#                    sample(c(1:100),1),
+#                    sample(c(1:100),1))
+#Write and Upload
+#write.csv(h, "/app/Ativo.csv", row.names = FALSE, quote = TRUE)
+#drop_upload("/app/Ativo.csv", path = "Dados",dtoken = token)
+
+h=read.csv("/app/Ativo.csv")
 h[1,]=c(h[1,1],sample(c(1:100),1),
                     sample(c(1:100),1),
                     sample(c(1:100),1),
                     sample(c(1:100),1),
                     sample(c(1:100),1))
-#Write and Upload
 write.csv(h, "/app/Ativo.csv", row.names = FALSE, quote = TRUE)
-drop_upload("/app/Ativo.csv", path = "Dados",dtoken = token)
 
 ##########################
 ### obtencao dos dados ###
@@ -543,6 +550,19 @@ shinyServer(function(input, output, session) {
       
       output$table_AI <- DT::renderDataTable({
         DT::datatable(ativo_ibovespa,style = 'bootstrap',options = list(
+          initComplete = JS(
+            "function(settings, json) {
+        $(this.api().table().header()).css({
+        'background-color': '#000',
+        'color': '#fff'
+        }); 
+        }")
+        ))
+      })
+  
+  
+        output$table_T <- DT::renderDataTable({
+        DT::datatable(h,style = 'bootstrap',options = list(
           initComplete = JS(
             "function(settings, json) {
         $(this.api().table().header()).css({
