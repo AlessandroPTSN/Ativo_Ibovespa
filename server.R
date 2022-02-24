@@ -110,7 +110,7 @@ for(i in 1:(j-1)){
   Ibo[(n+i),] = yyy[i,]
 }}
 if(j=1){
-  Ibo[1,] = yyy[1,]
+  Ibo[n,] = yyy[1,]
 }
 #Inverte ao normal
 Ibo = Ibo %>% map_df(rev)
@@ -142,7 +142,7 @@ if(j>1){
     Ati[(n+i),] = yyy2[i,]
   }}
 if(j=1){
-  Ati[1,] = yyy2[1,]
+  Ati[n,] = yyy2[1,]
 }
 #Inverte ao normal
 Ati = Ati %>% map_df(rev)
