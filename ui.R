@@ -101,7 +101,7 @@ Ibo = Ibo %>% map_df(rev)
 Ibo = as.data.frame(Ibo)
 Ibo$Data=as.Date(Ibo$Data)
 j=1
-while(Ibo[m,1] != yyy[j,1]){
+while((Ibo[m,1] != yyy[j,1])&(Ibo[m,1] != yyy[j,1])){
   j=j+1
 }
 #Adiciona novas celulas
@@ -137,7 +137,7 @@ Ati$Data=as.Date(Ati$Data)
 tail(Ati)
 head(yyy2)
 j=1
-while(Ati[n,1] != yyy2[j,1]){
+while((Ati[n,1] != yyy2[j,1])&(Ati[n,3] != yyy2[j,3])){
   j=j+1
 }
 #Adiciona novas celulas
