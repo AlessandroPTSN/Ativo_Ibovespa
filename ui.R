@@ -106,9 +106,9 @@ while((Ibo[m,1] != yyy[j,1])&(Ibo[m,4] != yyy[j,4])){
 }
 #Adiciona novas celulas
 if(j>1){
-for(i in 1:(j-1)){
-  Ibo[(m+i),] = yyy[j-i,]
-}}
+  for(i in 1:(j-1)){
+    Ibo[(m+i),] = yyy[j-i,]
+  }}
 if(j==1){
   Ibo[m,] = yyy[1,]
 }
@@ -175,17 +175,27 @@ tabela_I=
   tabela_I%>% select(Data, Abertura, Fechamento, Variacao)%>%
   mutate(Variacao_ = case_when( 
     as.numeric(Variacao)>4.5   ~ 5,
-    ((as.numeric(Variacao)<4.5)&(as.numeric(Variacao)>=3.51))   ~ 4,
-    ((as.numeric(Variacao)<3.5)&(as.numeric(Variacao)>=2.51))   ~ 3,
-    ((as.numeric(Variacao)<2.5)&(as.numeric(Variacao)>=1.51))   ~ 2,
-    ((as.numeric(Variacao)<1.5)&(as.numeric(Variacao)>=0.51))   ~ 1,
-    ((as.numeric(Variacao)<0.5)&(as.numeric(Variacao)>=-0.5))   ~ 0,
-    ((as.numeric(Variacao)> -1.5)&(as.numeric(Variacao)<=-0.5))   ~ -1,
-    ((as.numeric(Variacao)> -2.5)&(as.numeric(Variacao)<=-1.5))   ~ -2,
-    ((as.numeric(Variacao)> -3.5)&(as.numeric(Variacao)<=-2.5))   ~ -3,
-    ((as.numeric(Variacao)> -4.5)&(as.numeric(Variacao)<=-3.5))   ~ -4,
-    (as.numeric(Variacao)< -4.5)  ~ -5
+    ((as.numeric(Variacao)<=4.5)&(as.numeric(Variacao)>=3.51))   ~ 4,
+    ((as.numeric(Variacao)<=3.5)&(as.numeric(Variacao)>=2.51))   ~ 3,
+    ((as.numeric(Variacao)<=2.5)&(as.numeric(Variacao)>=1.51))   ~ 2,
+    ((as.numeric(Variacao)<=1.5)&(as.numeric(Variacao)>=0.51))   ~ 1,
+    ((as.numeric(Variacao)<=0.5)&(as.numeric(Variacao)>=-0.5))   ~ 0,
+    ((as.numeric(Variacao)>= -1.5)&(as.numeric(Variacao)<=-0.5))   ~ -1,
+    ((as.numeric(Variacao)>= -2.5)&(as.numeric(Variacao)<=-1.5))   ~ -2,
+    ((as.numeric(Variacao)>= -3.5)&(as.numeric(Variacao)<=-2.5))   ~ -3,
+    ((as.numeric(Variacao)>= -4.5)&(as.numeric(Variacao)<=-3.5))   ~ -4,
+    ((as.numeric(Variacao)>= -5.5)&(as.numeric(Variacao)<=-4.5))   ~ -5,
+    ((as.numeric(Variacao)>= -6.5)&(as.numeric(Variacao)<=-5.5))   ~ -6,
+    ((as.numeric(Variacao)>= -7.5)&(as.numeric(Variacao)<=-6.5))   ~ -7,
+    ((as.numeric(Variacao)>= -8.5)&(as.numeric(Variacao)<=-7.5))   ~ -8,
+    ((as.numeric(Variacao)>= -9.5)&(as.numeric(Variacao)<=-8.5))   ~ -9,
+    (as.numeric(Variacao)<= -10.5)  ~ -10
   ))
+
+
+
+
+
 
 tabela_I=
   tabela_I%>% select(Data, Abertura, Fechamento, Variacao,Variacao_)%>%
@@ -200,7 +210,12 @@ tabela_I=
     as.numeric(Variacao_)==-4   ~ length(as.numeric(tabela_I$Variacao_[tabela_I$Variacao_==-4])),
     as.numeric(Variacao_)==-3   ~ length(as.numeric(tabela_I$Variacao_[tabela_I$Variacao_==-3])),
     as.numeric(Variacao_)==-2   ~ length(as.numeric(tabela_I$Variacao_[tabela_I$Variacao_==-2])),
-    as.numeric(Variacao_)==-1   ~ length(as.numeric(tabela_I$Variacao_[tabela_I$Variacao_==-1]))
+    as.numeric(Variacao_)==-1   ~ length(as.numeric(tabela_I$Variacao_[tabela_I$Variacao_==-1])),
+    as.numeric(Variacao_)==-6   ~ length(as.numeric(tabela_I$Variacao_[tabela_I$Variacao_==-6])),
+    as.numeric(Variacao_)==-7   ~ length(as.numeric(tabela_I$Variacao_[tabela_I$Variacao_==-7])),
+    as.numeric(Variacao_)==-8   ~ length(as.numeric(tabela_I$Variacao_[tabela_I$Variacao_==-8])),
+    as.numeric(Variacao_)==-9   ~ length(as.numeric(tabela_I$Variacao_[tabela_I$Variacao_==-9])),
+    as.numeric(Variacao_)==-10   ~ length(as.numeric(tabela_I$Variacao_[tabela_I$Variacao_==-10]))
   ))
 
 
@@ -221,11 +236,16 @@ tabela_A=
     ((as.numeric(Variacao)<2.5)&(as.numeric(Variacao)>=1.51))   ~ 2,
     ((as.numeric(Variacao)<1.5)&(as.numeric(Variacao)>=0.51))   ~ 1,
     ((as.numeric(Variacao)<0.5)&(as.numeric(Variacao)>=-0.5))   ~ 0,
-    ((as.numeric(Variacao)> -1.5)&(as.numeric(Variacao)<=-0.5))   ~ -1,
-    ((as.numeric(Variacao)> -2.5)&(as.numeric(Variacao)<=-1.5))   ~ -2,
-    ((as.numeric(Variacao)> -3.5)&(as.numeric(Variacao)<=-2.5))   ~ -3,
-    ((as.numeric(Variacao)> -4.5)&(as.numeric(Variacao)<=-3.5))   ~ -4,
-    (as.numeric(Variacao)< -4.5)  ~ -5
+    ((as.numeric(Variacao)>= -1.5)&(as.numeric(Variacao)<=-0.5))   ~ -1,
+    ((as.numeric(Variacao)>= -2.5)&(as.numeric(Variacao)<=-1.5))   ~ -2,
+    ((as.numeric(Variacao)>= -3.5)&(as.numeric(Variacao)<=-2.5))   ~ -3,
+    ((as.numeric(Variacao)>= -4.5)&(as.numeric(Variacao)<=-3.5))   ~ -4,
+    ((as.numeric(Variacao)>= -5.5)&(as.numeric(Variacao)<=-4.5))   ~ -5,
+    ((as.numeric(Variacao)>= -6.5)&(as.numeric(Variacao)<=-5.5))   ~ -6,
+    ((as.numeric(Variacao)>= -7.5)&(as.numeric(Variacao)<=-6.5))   ~ -7,
+    ((as.numeric(Variacao)>= -8.5)&(as.numeric(Variacao)<=-7.5))   ~ -8,
+    ((as.numeric(Variacao)>= -9.5)&(as.numeric(Variacao)<=-8.5))   ~ -9,
+    (as.numeric(Variacao)<= -10.5)  ~ -10
   ))
 
 
@@ -242,7 +262,12 @@ tabela_A=
     as.numeric(Variacao_)==-4   ~ length(as.numeric(tabela_A$Variacao_[tabela_A$Variacao_==-4])),
     as.numeric(Variacao_)==-3   ~ length(as.numeric(tabela_A$Variacao_[tabela_A$Variacao_==-3])),
     as.numeric(Variacao_)==-2   ~ length(as.numeric(tabela_A$Variacao_[tabela_A$Variacao_==-2])),
-    as.numeric(Variacao_)==-1   ~ length(as.numeric(tabela_A$Variacao_[tabela_A$Variacao_==-1]))
+    as.numeric(Variacao_)==-1   ~ length(as.numeric(tabela_A$Variacao_[tabela_A$Variacao_==-1])),
+    as.numeric(Variacao_)==-6   ~ length(as.numeric(tabela_A$Variacao_[tabela_A$Variacao_==-6])),
+    as.numeric(Variacao_)==-7   ~ length(as.numeric(tabela_A$Variacao_[tabela_A$Variacao_==-7])),
+    as.numeric(Variacao_)==-8   ~ length(as.numeric(tabela_A$Variacao_[tabela_A$Variacao_==-8])),
+    as.numeric(Variacao_)==-9   ~ length(as.numeric(tabela_A$Variacao_[tabela_A$Variacao_==-9])),
+    as.numeric(Variacao_)==-10   ~ length(as.numeric(tabela_A$Variacao_[tabela_A$Variacao_==-10]))
   ))
 
 
@@ -264,11 +289,16 @@ ativo_ibovespa=
     ((as.numeric(Variacao)<2.5)&(as.numeric(Variacao)>=1.51))   ~ 2,
     ((as.numeric(Variacao)<1.5)&(as.numeric(Variacao)>=0.51))   ~ 1,
     ((as.numeric(Variacao)<0.5)&(as.numeric(Variacao)>=-0.5))   ~ 0,
-    ((as.numeric(Variacao)> -1.5)&(as.numeric(Variacao)<=-0.5))   ~ -1,
-    ((as.numeric(Variacao)> -2.5)&(as.numeric(Variacao)<=-1.5))   ~ -2,
-    ((as.numeric(Variacao)> -3.5)&(as.numeric(Variacao)<=-2.5))   ~ -3,
-    ((as.numeric(Variacao)> -4.5)&(as.numeric(Variacao)<=-3.5))   ~ -4,
-    (as.numeric(Variacao)< -4.5)  ~ -5
+    ((as.numeric(Variacao)>= -1.5)&(as.numeric(Variacao)<=-0.5))   ~ -1,
+    ((as.numeric(Variacao)>= -2.5)&(as.numeric(Variacao)<=-1.5))   ~ -2,
+    ((as.numeric(Variacao)>= -3.5)&(as.numeric(Variacao)<=-2.5))   ~ -3,
+    ((as.numeric(Variacao)>= -4.5)&(as.numeric(Variacao)<=-3.5))   ~ -4,
+    ((as.numeric(Variacao)>= -5.5)&(as.numeric(Variacao)<=-4.5))   ~ -5,
+    ((as.numeric(Variacao)>= -6.5)&(as.numeric(Variacao)<=-5.5))   ~ -6,
+    ((as.numeric(Variacao)>= -7.5)&(as.numeric(Variacao)<=-6.5))   ~ -7,
+    ((as.numeric(Variacao)>= -8.5)&(as.numeric(Variacao)<=-7.5))   ~ -8,
+    ((as.numeric(Variacao)>= -9.5)&(as.numeric(Variacao)<=-8.5))   ~ -9,
+    (as.numeric(Variacao)<= -10.5)  ~ -10
   ))
 
 ativo_ibovespa=
@@ -284,62 +314,82 @@ ativo_ibovespa=
     as.numeric(Variacao_)==-4   ~ length(as.numeric(ativo_ibovespa$Variacao_[ativo_ibovespa$Variacao_==-4])),
     as.numeric(Variacao_)==-3   ~ length(as.numeric(ativo_ibovespa$Variacao_[ativo_ibovespa$Variacao_==-3])),
     as.numeric(Variacao_)==-2   ~ length(as.numeric(ativo_ibovespa$Variacao_[ativo_ibovespa$Variacao_==-2])),
-    as.numeric(Variacao_)==-1   ~ length(as.numeric(ativo_ibovespa$Variacao_[ativo_ibovespa$Variacao_==-1]))
+    as.numeric(Variacao_)==-1   ~ length(as.numeric(ativo_ibovespa$Variacao_[ativo_ibovespa$Variacao_==-1])),
+    as.numeric(Variacao_)==-6   ~ length(as.numeric(ativo_ibovespa$Variacao_[ativo_ibovespa$Variacao_==-6])),
+    as.numeric(Variacao_)==-7   ~ length(as.numeric(ativo_ibovespa$Variacao_[ativo_ibovespa$Variacao_==-7])),
+    as.numeric(Variacao_)==-8   ~ length(as.numeric(ativo_ibovespa$Variacao_[ativo_ibovespa$Variacao_==-8])),
+    as.numeric(Variacao_)==-9   ~ length(as.numeric(ativo_ibovespa$Variacao_[ativo_ibovespa$Variacao_==-9])),
+    as.numeric(Variacao_)==-10   ~ length(as.numeric(ativo_ibovespa$Variacao_[ativo_ibovespa$Variacao_==-10]))
   ))
+
+
+
+
+Fact_A=as.factor(tabela_A$Variacao_)
+Fact_A=ordered(Fact_A, levels =as.character(c(-10:-1)))
+
+
+
+Fact_I=as.factor(tabela_I$Variacao_)
+Fact_I=ordered(Fact_I, levels =as.character(c(-10:-1)))
+
+
+Fact_A_I=as.factor(ativo_ibovespa$Variacao_)
+Fact_A_I=ordered(Fact_A_I, levels =as.character(c(-10:-1)))
 
 
 
 navbarPage("Dashboard",theme = shinytheme("slate"),
            
-                           tabPanel("Diferença",theme = shinytheme("slate"),
-                titlePanel("Diferença de ações entre Ativo - Ibovespa"),   
-                mainPanel(p("Atualizado em:",yyy[1,1]),
-                          
-                ),
-                column(
-                  12,fluidRow(column(12, highchartOutput('chart22')))
-                ),
-                downloadButton("downloadData5", "Download Ativo-Ibovespa"),
-                h2("Ativo - Ibovespa"),
-                DT::dataTableOutput("table_AI"),
-
-),
-
-                        tabPanel("Ativo",  
-                         column(12,h2("Ativo"),p("Fonte:",a("https://br.investing.com/equities/imc-holdings-on-historical-data",   href="https://br.investing.com/equities/imc-holdings-on-historical-data")),
-                                fluidRow(column(12, highchartOutput('chart_1'))),
-                                h2("Download dados Ativo"), 
-                                downloadButton("downloadData2", "Download Ativo"),
-                                h2("Download dados Ativo Histograma"), 
-                                downloadButton("downloadData3", "Download Ativo_H"),
-                                h2("Ativo - Tabela"),
-                                DT::dataTableOutput("table_A"))
-                             ),
+           tabPanel("Diferença",theme = shinytheme("slate"),
+                    titlePanel("Diferença de ações entre Ativo - Ibovespa"),   
+                    mainPanel(p("Atualizado em:",yyy[1,1]),
+                              
+                    ),
+                    column(
+                      12,fluidRow(column(12, highchartOutput('chart22')))
+                    ),
+                    downloadButton("downloadData5", "Download Ativo-Ibovespa"),
+                    h2("Ativo - Ibovespa"),
+                    DT::dataTableOutput("table_AI"),
+                    
+           ),
            
-                          tabPanel("Ibovespa",          
-                         column(12,h2("Ibovespa"),p("Fonte:",a("https://br.investing.com/indices/bovespa-historical-data",   href="https://br.investing.com/indices/bovespa-historical-data")),
-                                fluidRow(column(12, highchartOutput('chart_2'))),h2("Download dados Ibovespa"), 
-                                downloadButton("downloadData1", "Download Ibovespa"),
-                                h2("Download dados Ibovespa Histograma"), 
-                                downloadButton("downloadData4", "Download Ibovespa_H"),
-                                h2("Ibovespa - Tabela"),
-                                DT::dataTableOutput("table_I"),),
-                            ),
+           tabPanel("Ativo",  
+                    column(12,h2("Ativo"),p("Fonte:",a("https://br.investing.com/equities/imc-holdings-on-historical-data",   href="https://br.investing.com/equities/imc-holdings-on-historical-data")),
+                           fluidRow(column(12, highchartOutput('chart_1'))),
+                           h2("Download dados Ativo"), 
+                           downloadButton("downloadData2", "Download Ativo"),
+                           h2("Download dados Ativo Histograma"), 
+                           downloadButton("downloadData3", "Download Ativo_H"),
+                           h2("Ativo - Tabela"),
+                           DT::dataTableOutput("table_A"))
+           ),
            
-                
-                tabPanel("Criadores",
-                         fluidRow(
-                           tags$style(HTML("
+           tabPanel("Ibovespa",          
+                    column(12,h2("Ibovespa"),p("Fonte:",a("https://br.investing.com/indices/bovespa-historical-data",   href="https://br.investing.com/indices/bovespa-historical-data")),
+                           fluidRow(column(12, highchartOutput('chart_2'))),h2("Download dados Ibovespa"), 
+                           downloadButton("downloadData1", "Download Ibovespa"),
+                           h2("Download dados Ibovespa Histograma"), 
+                           downloadButton("downloadData4", "Download Ibovespa_H"),
+                           h2("Ibovespa - Tabela"),
+                           DT::dataTableOutput("table_I"),),
+           ),
+           
+           
+           tabPanel("Criadores",
+                    fluidRow(
+                      tags$style(HTML("
                     img {
                       border-radius: 50%;
                     }")),
-                           column(width = 6,uiOutput("img"),h2("Alessandro Pereira"),p("Graduando em Estatística da Universidade Federal do Rio Grande do Norte. Possui experiência em ciência de dados, principalmente na utilização da linguagem R. Usuário avançado do framework shiny, utilizado para a construção de dashboards.") ,p("GitHub:",a("https://github.com/AlessandroPTSN",   href="https://github.com/AlessandroPTSN"))),
-                           column(width = 6, uiOutput("img2"),h2("Felipe Sergio"),p(" Analista de TI focado em desenvolvimento de software, linguagens de programação e infraestrutura como código. Profissional com experiência comprovada nas áreas de administração de sistemas Linux,Gerenciamento de datacenter, técnico, consultoria e implantação de sistemas corporativos."),p("GitHub:",a("https://github.com/felipesergios",   href="https://github.com/felipesergios")))
-                         
-                )
-                         
-               
-                )
+                      column(width = 6,uiOutput("img"),h2("Alessandro Pereira"),p("Graduando em Estatística da Universidade Federal do Rio Grande do Norte. Possui experiência em ciência de dados, principalmente na utilização da linguagem R. Usuário avançado do framework shiny, utilizado para a construção de dashboards.") ,p("GitHub:",a("https://github.com/AlessandroPTSN",   href="https://github.com/AlessandroPTSN"))),
+                      column(width = 6, uiOutput("img2"),h2("Felipe Sergio"),p(" Analista de TI focado em desenvolvimento de software, linguagens de programação e infraestrutura como código. Profissional com experiência comprovada nas áreas de administração de sistemas Linux,Gerenciamento de datacenter, técnico, consultoria e implantação de sistemas corporativos."),p("GitHub:",a("https://github.com/felipesergios",   href="https://github.com/felipesergios")))
+                      
+                    )
+                    
+                    
+           )
            
            
            
