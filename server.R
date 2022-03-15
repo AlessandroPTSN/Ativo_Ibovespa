@@ -91,6 +91,8 @@ colnames(yyy2) <- c("Data","Abertura","Fechamento","Variacao","Minimo","Maximo")
 yyy2 = yyy2[-20,]
 
 
+
+
 Ibo = read.csv("/app/Ibo.csv")
 #yyy = novo
 #Ibo = antigo
@@ -105,9 +107,9 @@ while((Ibo[m,1] != yyy[j,1])&(Ibo[m,4] != yyy[j,4])){
 }
 #Adiciona novas celulas
 if(j>1){
-for(i in 1:(j-1)){
-  Ibo[(m+i),] = yyy[j-i,]
-}}
+  for(i in 1:(j-1)){
+    Ibo[(m+i),] = yyy[j-i,]
+  }}
 if(j==1){
   Ibo[m,] = yyy[1,]
 }
@@ -160,9 +162,10 @@ if(j>1){
 write.csv(Ati, "/app/Ati.csv", row.names = FALSE, quote = TRUE)
 
 
-
 yyy2=Ati
 yyy=Ibo
+
+
 
 
 
@@ -173,17 +176,27 @@ tabela_I=
   tabela_I%>% select(Data, Abertura, Fechamento, Variacao)%>%
   mutate(Variacao_ = case_when( 
     as.numeric(Variacao)>4.5   ~ 5,
-    ((as.numeric(Variacao)<4.5)&(as.numeric(Variacao)>=3.51))   ~ 4,
-    ((as.numeric(Variacao)<3.5)&(as.numeric(Variacao)>=2.51))   ~ 3,
-    ((as.numeric(Variacao)<2.5)&(as.numeric(Variacao)>=1.51))   ~ 2,
-    ((as.numeric(Variacao)<1.5)&(as.numeric(Variacao)>=0.51))   ~ 1,
-    ((as.numeric(Variacao)<0.5)&(as.numeric(Variacao)>=-0.5))   ~ 0,
-    ((as.numeric(Variacao)> -1.5)&(as.numeric(Variacao)<=-0.5))   ~ -1,
-    ((as.numeric(Variacao)> -2.5)&(as.numeric(Variacao)<=-1.5))   ~ -2,
-    ((as.numeric(Variacao)> -3.5)&(as.numeric(Variacao)<=-2.5))   ~ -3,
-    ((as.numeric(Variacao)> -4.5)&(as.numeric(Variacao)<=-3.5))   ~ -4,
-    (as.numeric(Variacao)< -4.5)  ~ -5
+    ((as.numeric(Variacao)<=4.5)&(as.numeric(Variacao)>=3.51))   ~ 4,
+    ((as.numeric(Variacao)<=3.5)&(as.numeric(Variacao)>=2.51))   ~ 3,
+    ((as.numeric(Variacao)<=2.5)&(as.numeric(Variacao)>=1.51))   ~ 2,
+    ((as.numeric(Variacao)<=1.5)&(as.numeric(Variacao)>=0.51))   ~ 1,
+    ((as.numeric(Variacao)<=0.5)&(as.numeric(Variacao)>=-0.5))   ~ 0,
+    ((as.numeric(Variacao)>= -1.5)&(as.numeric(Variacao)<=-0.5))   ~ -1,
+    ((as.numeric(Variacao)>= -2.5)&(as.numeric(Variacao)<=-1.5))   ~ -2,
+    ((as.numeric(Variacao)>= -3.5)&(as.numeric(Variacao)<=-2.5))   ~ -3,
+    ((as.numeric(Variacao)>= -4.5)&(as.numeric(Variacao)<=-3.5))   ~ -4,
+    ((as.numeric(Variacao)>= -5.5)&(as.numeric(Variacao)<=-4.5))   ~ -5,
+    ((as.numeric(Variacao)>= -6.5)&(as.numeric(Variacao)<=-5.5))   ~ -6,
+    ((as.numeric(Variacao)>= -7.5)&(as.numeric(Variacao)<=-6.5))   ~ -7,
+    ((as.numeric(Variacao)>= -8.5)&(as.numeric(Variacao)<=-7.5))   ~ -8,
+    ((as.numeric(Variacao)>= -9.5)&(as.numeric(Variacao)<=-8.5))   ~ -9,
+    (as.numeric(Variacao)<= -10.5)  ~ -10
   ))
+
+
+
+
+
 
 tabela_I=
   tabela_I%>% select(Data, Abertura, Fechamento, Variacao,Variacao_)%>%
@@ -198,7 +211,12 @@ tabela_I=
     as.numeric(Variacao_)==-4   ~ length(as.numeric(tabela_I$Variacao_[tabela_I$Variacao_==-4])),
     as.numeric(Variacao_)==-3   ~ length(as.numeric(tabela_I$Variacao_[tabela_I$Variacao_==-3])),
     as.numeric(Variacao_)==-2   ~ length(as.numeric(tabela_I$Variacao_[tabela_I$Variacao_==-2])),
-    as.numeric(Variacao_)==-1   ~ length(as.numeric(tabela_I$Variacao_[tabela_I$Variacao_==-1]))
+    as.numeric(Variacao_)==-1   ~ length(as.numeric(tabela_I$Variacao_[tabela_I$Variacao_==-1])),
+    as.numeric(Variacao_)==-6   ~ length(as.numeric(tabela_I$Variacao_[tabela_I$Variacao_==-6])),
+    as.numeric(Variacao_)==-7   ~ length(as.numeric(tabela_I$Variacao_[tabela_I$Variacao_==-7])),
+    as.numeric(Variacao_)==-8   ~ length(as.numeric(tabela_I$Variacao_[tabela_I$Variacao_==-8])),
+    as.numeric(Variacao_)==-9   ~ length(as.numeric(tabela_I$Variacao_[tabela_I$Variacao_==-9])),
+    as.numeric(Variacao_)==-10   ~ length(as.numeric(tabela_I$Variacao_[tabela_I$Variacao_==-10]))
   ))
 
 
@@ -219,11 +237,16 @@ tabela_A=
     ((as.numeric(Variacao)<2.5)&(as.numeric(Variacao)>=1.51))   ~ 2,
     ((as.numeric(Variacao)<1.5)&(as.numeric(Variacao)>=0.51))   ~ 1,
     ((as.numeric(Variacao)<0.5)&(as.numeric(Variacao)>=-0.5))   ~ 0,
-    ((as.numeric(Variacao)> -1.5)&(as.numeric(Variacao)<=-0.5))   ~ -1,
-    ((as.numeric(Variacao)> -2.5)&(as.numeric(Variacao)<=-1.5))   ~ -2,
-    ((as.numeric(Variacao)> -3.5)&(as.numeric(Variacao)<=-2.5))   ~ -3,
-    ((as.numeric(Variacao)> -4.5)&(as.numeric(Variacao)<=-3.5))   ~ -4,
-    (as.numeric(Variacao)< -4.5)  ~ -5
+    ((as.numeric(Variacao)>= -1.5)&(as.numeric(Variacao)<=-0.5))   ~ -1,
+    ((as.numeric(Variacao)>= -2.5)&(as.numeric(Variacao)<=-1.5))   ~ -2,
+    ((as.numeric(Variacao)>= -3.5)&(as.numeric(Variacao)<=-2.5))   ~ -3,
+    ((as.numeric(Variacao)>= -4.5)&(as.numeric(Variacao)<=-3.5))   ~ -4,
+    ((as.numeric(Variacao)>= -5.5)&(as.numeric(Variacao)<=-4.5))   ~ -5,
+    ((as.numeric(Variacao)>= -6.5)&(as.numeric(Variacao)<=-5.5))   ~ -6,
+    ((as.numeric(Variacao)>= -7.5)&(as.numeric(Variacao)<=-6.5))   ~ -7,
+    ((as.numeric(Variacao)>= -8.5)&(as.numeric(Variacao)<=-7.5))   ~ -8,
+    ((as.numeric(Variacao)>= -9.5)&(as.numeric(Variacao)<=-8.5))   ~ -9,
+    (as.numeric(Variacao)<= -10.5)  ~ -10
   ))
 
 
@@ -240,7 +263,12 @@ tabela_A=
     as.numeric(Variacao_)==-4   ~ length(as.numeric(tabela_A$Variacao_[tabela_A$Variacao_==-4])),
     as.numeric(Variacao_)==-3   ~ length(as.numeric(tabela_A$Variacao_[tabela_A$Variacao_==-3])),
     as.numeric(Variacao_)==-2   ~ length(as.numeric(tabela_A$Variacao_[tabela_A$Variacao_==-2])),
-    as.numeric(Variacao_)==-1   ~ length(as.numeric(tabela_A$Variacao_[tabela_A$Variacao_==-1]))
+    as.numeric(Variacao_)==-1   ~ length(as.numeric(tabela_A$Variacao_[tabela_A$Variacao_==-1])),
+    as.numeric(Variacao_)==-6   ~ length(as.numeric(tabela_A$Variacao_[tabela_A$Variacao_==-6])),
+    as.numeric(Variacao_)==-7   ~ length(as.numeric(tabela_A$Variacao_[tabela_A$Variacao_==-7])),
+    as.numeric(Variacao_)==-8   ~ length(as.numeric(tabela_A$Variacao_[tabela_A$Variacao_==-8])),
+    as.numeric(Variacao_)==-9   ~ length(as.numeric(tabela_A$Variacao_[tabela_A$Variacao_==-9])),
+    as.numeric(Variacao_)==-10   ~ length(as.numeric(tabela_A$Variacao_[tabela_A$Variacao_==-10]))
   ))
 
 
@@ -262,11 +290,16 @@ ativo_ibovespa=
     ((as.numeric(Variacao)<2.5)&(as.numeric(Variacao)>=1.51))   ~ 2,
     ((as.numeric(Variacao)<1.5)&(as.numeric(Variacao)>=0.51))   ~ 1,
     ((as.numeric(Variacao)<0.5)&(as.numeric(Variacao)>=-0.5))   ~ 0,
-    ((as.numeric(Variacao)> -1.5)&(as.numeric(Variacao)<=-0.5))   ~ -1,
-    ((as.numeric(Variacao)> -2.5)&(as.numeric(Variacao)<=-1.5))   ~ -2,
-    ((as.numeric(Variacao)> -3.5)&(as.numeric(Variacao)<=-2.5))   ~ -3,
-    ((as.numeric(Variacao)> -4.5)&(as.numeric(Variacao)<=-3.5))   ~ -4,
-    (as.numeric(Variacao)< -4.5)  ~ -5
+    ((as.numeric(Variacao)>= -1.5)&(as.numeric(Variacao)<=-0.5))   ~ -1,
+    ((as.numeric(Variacao)>= -2.5)&(as.numeric(Variacao)<=-1.5))   ~ -2,
+    ((as.numeric(Variacao)>= -3.5)&(as.numeric(Variacao)<=-2.5))   ~ -3,
+    ((as.numeric(Variacao)>= -4.5)&(as.numeric(Variacao)<=-3.5))   ~ -4,
+    ((as.numeric(Variacao)>= -5.5)&(as.numeric(Variacao)<=-4.5))   ~ -5,
+    ((as.numeric(Variacao)>= -6.5)&(as.numeric(Variacao)<=-5.5))   ~ -6,
+    ((as.numeric(Variacao)>= -7.5)&(as.numeric(Variacao)<=-6.5))   ~ -7,
+    ((as.numeric(Variacao)>= -8.5)&(as.numeric(Variacao)<=-7.5))   ~ -8,
+    ((as.numeric(Variacao)>= -9.5)&(as.numeric(Variacao)<=-8.5))   ~ -9,
+    (as.numeric(Variacao)<= -10.5)  ~ -10
   ))
 
 ativo_ibovespa=
@@ -282,8 +315,29 @@ ativo_ibovespa=
     as.numeric(Variacao_)==-4   ~ length(as.numeric(ativo_ibovespa$Variacao_[ativo_ibovespa$Variacao_==-4])),
     as.numeric(Variacao_)==-3   ~ length(as.numeric(ativo_ibovespa$Variacao_[ativo_ibovespa$Variacao_==-3])),
     as.numeric(Variacao_)==-2   ~ length(as.numeric(ativo_ibovespa$Variacao_[ativo_ibovespa$Variacao_==-2])),
-    as.numeric(Variacao_)==-1   ~ length(as.numeric(ativo_ibovespa$Variacao_[ativo_ibovespa$Variacao_==-1]))
+    as.numeric(Variacao_)==-1   ~ length(as.numeric(ativo_ibovespa$Variacao_[ativo_ibovespa$Variacao_==-1])),
+    as.numeric(Variacao_)==-6   ~ length(as.numeric(ativo_ibovespa$Variacao_[ativo_ibovespa$Variacao_==-6])),
+    as.numeric(Variacao_)==-7   ~ length(as.numeric(ativo_ibovespa$Variacao_[ativo_ibovespa$Variacao_==-7])),
+    as.numeric(Variacao_)==-8   ~ length(as.numeric(ativo_ibovespa$Variacao_[ativo_ibovespa$Variacao_==-8])),
+    as.numeric(Variacao_)==-9   ~ length(as.numeric(ativo_ibovespa$Variacao_[ativo_ibovespa$Variacao_==-9])),
+    as.numeric(Variacao_)==-10   ~ length(as.numeric(ativo_ibovespa$Variacao_[ativo_ibovespa$Variacao_==-10]))
   ))
+
+
+
+
+Fact_A=as.factor(tabela_A$Variacao_)
+Fact_A=ordered(Fact_A, levels =as.character(c(-10:-1)))
+
+
+
+Fact_I=as.factor(tabela_I$Variacao_)
+Fact_I=ordered(Fact_I, levels =as.character(c(-10:-1)))
+
+
+Fact_A_I=as.factor(ativo_ibovespa$Variacao_)
+Fact_A_I=ordered(Fact_A_I, levels =as.character(c(-10:-1)))
+
 
 
 
@@ -294,7 +348,7 @@ ativo_ibovespa=
 
 shinyServer(function(input, output, session) {
 
-    output$img <- renderUI({
+output$img <- renderUI({
     tags$img(src = "https://github.com/alessandroptsn.png", height = 208)
   })
   
@@ -304,7 +358,7 @@ shinyServer(function(input, output, session) {
   })
   
   
-
+  
   
   outVar1 <- reactive({
     reshape2::melt(yyy, id.vars = "Data")%>%
@@ -319,7 +373,7 @@ shinyServer(function(input, output, session) {
   output$plot <- renderPlotly({
     plot_ly(data=outVar1(), x=~Data,  y = ~value,
             type = 'scatter', mode = 'lines', legendgroup = "1",color = ~variable
-            ) %>%
+    ) %>%
       add_trace(data=outVar2(), x=~Data,  y = ~value,
                 type = 'scatter', mode = 'lines', legendgroup = "2",color = ~variable)  %>%
       layout(legend = list(orientation = 'v'))         
@@ -327,8 +381,8 @@ shinyServer(function(input, output, session) {
   
   
   output$chart22 <- renderHighchart({
-  hchart(as.factor(ativo_ibovespa$Variacao_), type = "column",series.showInLegend = F)%>%
-    hc_chart(events = list(load = JS("function() {
+    hchart(Fact_A_I, type = "column",series.showInLegend = F)%>%
+      hc_chart(events = list(load = JS("function() {
 
     this.series.forEach(function(series) {
       if (series.name === 'Series 1') {
@@ -339,31 +393,31 @@ shinyServer(function(input, output, session) {
     });
 
   }")))  %>% 
-    hc_title(text = "Contagem variação ações Ativo - Ibovespa") %>% 
-    hc_xAxis(title= list(text= "Variação")) %>%
-    hc_yAxis(title= list(text="Contagem")) %>% 
-    hc_add_theme(hc_theme_darkunica())
+      hc_title(text = "Contagem variação ações Ativo - Ibovespa") %>% 
+      hc_xAxis(title= list(text= "Variação")) %>%
+      hc_yAxis(title= list(text="Contagem")) %>% 
+      hc_add_theme(hc_theme_darkunica())
   }) 
   
   output$chart2 <- renderHighchart({
-  hchart(rbind(outVar1(), outVar2()), "line", hcaes(Data, value, group = variable), regression = TRUE) %>% 
-    hc_title(text = "Análise comparativa entre Ibovespa x Ativo") %>% 
-    hc_xAxis(title= list(text= "Dias ")) %>%
-    hc_yAxis(title= list(text="Variação ")) %>% 
-    hc_add_theme(hc_theme_darkunica()) #%>% 
-  
+    hchart(rbind(outVar1(), outVar2()), "line", hcaes(Data, value, group = variable), regression = TRUE) %>% 
+      hc_title(text = "Análise comparativa entre Ibovespa x Ativo") %>% 
+      hc_xAxis(title= list(text= "Dias ")) %>%
+      hc_yAxis(title= list(text="Variação ")) %>% 
+      hc_add_theme(hc_theme_darkunica()) #%>% 
+    
   }) 
   
   
   output$table_Regiaooo2<- function() {  
     yyy%>%
-    knitr::kable("html") %>%
-    kable_styling("striped", full_width = F)
+      knitr::kable("html") %>%
+      kable_styling("striped", full_width = F)
   }
   
   output$table_Regiaooo22<- function() {  
     yyy2%>%
-    knitr::kable("html") %>%
+      knitr::kable("html") %>%
       kable_styling("striped", full_width = F)
   }
   
@@ -374,11 +428,11 @@ shinyServer(function(input, output, session) {
       kable_styling("striped", full_width = F)
   }
   
-
+  
   
   output$chart_1 <- renderHighchart({
-  hchart(as.factor(tabela_A$Variacao_), type = "column",series.showInLegend = F)%>%
-    hc_chart(events = list(load = JS("function() {
+    hchart(Fact_A, type = "column",series.showInLegend = F)%>%
+      hc_chart(events = list(load = JS("function() {
 
     this.series.forEach(function(series) {
       if (series.name === 'Series 1') {
@@ -389,18 +443,18 @@ shinyServer(function(input, output, session) {
     });
 
   }")))  %>% 
-    hc_title(text = "Contagem variação ações Ativo") %>% 
-    hc_xAxis(title= list(text= "Variação")) %>% 
-    hc_colors(c("#2980b9"))  %>%
-    hc_yAxis(title= list(text="Contagem")) %>% 
-    hc_add_theme(hc_theme_darkunica())
+      hc_title(text = "Contagem variação ações Ativo") %>% 
+      hc_xAxis(title= list(text= "Variação")) %>% 
+      hc_colors(c("#2980b9"))  %>%
+      hc_yAxis(title= list(text="Contagem")) %>% 
+      hc_add_theme(hc_theme_darkunica())
   }) 
   
   
   
-    
-    output$chart_2 <- renderHighchart({
-    hchart(as.factor(tabela_I$Variacao_), type = "column",series.showInLegend = F)%>%
+  
+  output$chart_2 <- renderHighchart({
+    hchart(Fact_I, type = "column",series.showInLegend = F)%>%
       hc_chart(events = list(load = JS("function() {
 
     this.series.forEach(function(series) {
@@ -417,99 +471,99 @@ shinyServer(function(input, output, session) {
       hc_colors(c("#d35400"))  %>%
       hc_yAxis(title= list(text="Contagem")) %>% 
       hc_add_theme(hc_theme_darkunica())
-    }) 
-    
-      
-      
-      output$downloadData1 <- downloadHandler(
-        filename = function() {
-          paste("Ibovespa ",str_replace_all(as.character(Sys.time()),":","_"), ".csv", sep="")
-        },
-        content = function(file) {
-          write.csv(as.data.frame(yyy), file, row.names = FALSE)
-        }
-      )
-      
-      output$downloadData2 <- downloadHandler(
-        filename = function() {
-          paste("Ativo ",str_replace_all(as.character(Sys.time()),":","_"), ".csv", sep="")
-        },
-        content = function(file) {
-          write.csv(as.data.frame(yyy2), file, row.names = FALSE)
-        }
-      )
-      
-      
-      
-      output$downloadData3 <- downloadHandler(
-        filename = function() {
-          paste("Ativo_H ",str_replace_all(as.character(Sys.time()),":","_"), ".csv", sep="")
-        },
-        content = function(file) {
-          write.csv(as.data.frame(tabela_A), file, row.names = FALSE)
-        }
-      )
-      
-      
-      
-      output$downloadData4 <- downloadHandler(
-        filename = function() {
-          paste("Ibovespa_H ",str_replace_all(as.character(Sys.time()),":","_"), ".csv", sep="")
-        },
-        content = function(file) {
-          write.csv(as.data.frame(tabela_I), file, row.names = FALSE)
-        }
-      ) 
-      
-      output$downloadData5 <- downloadHandler(
-        filename = function() {
-          paste("Ibovespa_H ",str_replace_all(as.character(Sys.time()),":","_"), ".csv", sep="")
-        },
-        content = function(file) {
-          write.csv(as.data.frame(ativo_ibovespa), file, row.names = FALSE)
-        }
-      ) 
-      
-      
-      tabPanel("Dados",
-               DT::dataTableOutput("table")
-               
-      )
-      output$table_I <- DT::renderDataTable({
-        DT::datatable(tabela_I,style = 'bootstrap',options = list(
-          initComplete = JS(
-            "function(settings, json) {
+  }) 
+  
+  
+  
+  output$downloadData1 <- downloadHandler(
+    filename = function() {
+      paste("Ibovespa ",str_replace_all(as.character(Sys.time()),":","_"), ".csv", sep="")
+    },
+    content = function(file) {
+      write.csv(as.data.frame(yyy), file, row.names = FALSE)
+    }
+  )
+  
+  output$downloadData2 <- downloadHandler(
+    filename = function() {
+      paste("Ativo ",str_replace_all(as.character(Sys.time()),":","_"), ".csv", sep="")
+    },
+    content = function(file) {
+      write.csv(as.data.frame(yyy2), file, row.names = FALSE)
+    }
+  )
+  
+  
+  
+  output$downloadData3 <- downloadHandler(
+    filename = function() {
+      paste("Ativo_H ",str_replace_all(as.character(Sys.time()),":","_"), ".csv", sep="")
+    },
+    content = function(file) {
+      write.csv(as.data.frame(tabela_A), file, row.names = FALSE)
+    }
+  )
+  
+  
+  
+  output$downloadData4 <- downloadHandler(
+    filename = function() {
+      paste("Ibovespa_H ",str_replace_all(as.character(Sys.time()),":","_"), ".csv", sep="")
+    },
+    content = function(file) {
+      write.csv(as.data.frame(tabela_I), file, row.names = FALSE)
+    }
+  ) 
+  
+  output$downloadData5 <- downloadHandler(
+    filename = function() {
+      paste("Ibovespa_H ",str_replace_all(as.character(Sys.time()),":","_"), ".csv", sep="")
+    },
+    content = function(file) {
+      write.csv(as.data.frame(ativo_ibovespa), file, row.names = FALSE)
+    }
+  ) 
+  
+  
+  tabPanel("Dados",
+           DT::dataTableOutput("table")
+           
+  )
+  output$table_I <- DT::renderDataTable({
+    DT::datatable(tabela_I,style = 'bootstrap',options = list(
+      initComplete = JS(
+        "function(settings, json) {
         $(this.api().table().header()).css({
         'background-color': '#000',
         'color': '#fff'
         }); 
         }")
-        ))
-      })
-      
-      output$table_A <- DT::renderDataTable({
-        DT::datatable(tabela_A,style = 'bootstrap',options = list(
-          initComplete = JS(
-            "function(settings, json) {
+    ))
+  })
+  
+  output$table_A <- DT::renderDataTable({
+    DT::datatable(tabela_A,style = 'bootstrap',options = list(
+      initComplete = JS(
+        "function(settings, json) {
         $(this.api().table().header()).css({
         'background-color': '#000',
         'color': '#fff'
         }); 
         }")
-        ))
-      })
-      
-      output$table_AI <- DT::renderDataTable({
-        DT::datatable(ativo_ibovespa,style = 'bootstrap',options = list(
-          initComplete = JS(
-            "function(settings, json) {
+    ))
+  })
+  
+  output$table_AI <- DT::renderDataTable({
+    DT::datatable(ativo_ibovespa,style = 'bootstrap',options = list(
+      initComplete = JS(
+        "function(settings, json) {
         $(this.api().table().header()).css({
         'background-color': '#000',
         'color': '#fff'
         }); 
         }")
-        ))
-      })
+    ))
+  })
   
   
 
