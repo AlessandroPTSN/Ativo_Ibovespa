@@ -1,6 +1,7 @@
 # Ativo_Ibovespa
 App para ver as variações de ações de Ativo e Ibovespa
-https://ativo-ibovespa.herokuapp.com
+https://ativo-ibovespa.herokuapp.com  
+https://alessandropereira.shinyapps.io/test/
 
 https://github.com/virtualstaticvoid/heroku-buildpack-r.git
 
