@@ -17,7 +17,6 @@ library(reshape2)
 library(DT)
 
 
-
 ##########################
 ### obtencao dos dados ###
 ##########################
@@ -31,13 +30,16 @@ library(DT)
 url <- "https://br.investing.com/indices/bovespa-historical-data"
 zzz= read_html(url) %>%
   html_nodes("tr") %>%
-  html_text()%>%str_replace("%\n", "")%>%str_replace("\n", " ")%>%str_replace("M", "")
+  html_text2()%>%str_replace("%\n", "")%>%str_replace("\n", " ")%>%str_replace("M", "")%>%str_replace("\t", " ")
 
-zzz=gsub("\n", " ",zzz[2:20])
+zzz=gsub("\n", " ",zzz[3:21])
 
 zzz=read.table(text=zzz,col.names= c("Data" ,"Ultimo", "Abertura", "Maxima" ,"Minima" ,"Vol" ,"Var"))
 zzz[,6]=zzz[,6]%>%str_replace(",", ".")
 zzz[,7]=zzz[,7]%>%str_replace(",", ".")
+zzz[,7]=zzz[,7]%>%str_replace("\\+", "")
+zzz[,7]=zzz[,7]%>%str_replace("-", "")
+zzz[,7]=zzz[,7]%>%str_replace("%", "")
 zzz[,1]= as.Date(zzz[,1], "%d.%m.%Y")
 for(i in 2:7){
   zzz[,i]=as.numeric(zzz[,i])
@@ -64,11 +66,15 @@ colnames(yyy) <- c("Data","Abertura","Fechamento","Variacao","Minimo","Maximo")
 url2 <- "https://br.investing.com/equities/imc-holdings-on-historical-data"
 zzz2= read_html(url2) %>%
   html_nodes("tr") %>%
-  html_text()%>%str_replace("%\n", "")%>%str_replace("\n", " ")#%>%str_replace("M", "")
+  html_text2()%>%str_replace("%\n", "")%>%str_replace("\n", " ")%>%str_replace("\t", " ")#%>%str_replace("M", "")
 
-zzz2=gsub("\n", " ",zzz2[2:20])
+zzz2=gsub("\n", " ",zzz2[3:21])
 
 zzz2=read.table(text=zzz2,col.names= c("Data" ,"Ultimo", "Abertura", "Maxima" ,"Minima" ,"Vol" ,"Var"))
+
+zzz2[,7]=zzz2[,7]%>%str_replace("\\+", "")
+zzz2[,7]=zzz2[,7]%>%str_replace("-", "")
+zzz2[,7]=zzz2[,7]%>%str_replace("%", "")
 for( i in 2:7){
   zzz2[,i]=zzz2[,i]%>%str_replace(",", ".")
 }
@@ -88,7 +94,7 @@ yyy2=yyy2[,-c(4,5)]
 yyy2= yyy2[, c(1, 2, 3, 5,4)]
 yyy2$Maximo = as.numeric(as.matrix(zzz2[4]))
 colnames(yyy2) <- c("Data","Abertura","Fechamento","Variacao","Minimo","Maximo")
-yyy2 = yyy2[-20,]
+#yyy2 = yyy2[-20,]
 
 
 
