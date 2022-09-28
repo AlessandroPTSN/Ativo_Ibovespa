@@ -108,7 +108,7 @@ Ibo = Ibo %>% map_df(rev)
 Ibo = as.data.frame(Ibo)
 Ibo$Data=as.Date(Ibo$Data)
 j=1
-while((Ibo[m,1] != yyy[j,1])&(Ibo[m,4] != yyy[j,4])){
+while((Ibo[m,1] != yyy[j,1])&(Ibo[m,4] != yyy[j,4])&(j<20)){
   j=j+1
 }
 #Adiciona novas celulas
@@ -144,7 +144,7 @@ Ati$Data=as.Date(Ati$Data)
 tail(Ati)
 head(yyy2)
 j=1
-while((Ati[n,1] != yyy2[j,1])&(Ati[n,4] != yyy2[j,4])){
+while((Ati[n,1] != yyy2[j,1])&(Ati[n,4] != yyy2[j,4])&(j<20)){
   j=j+1
 }
 #Adiciona novas celulas
@@ -384,14 +384,14 @@ navbarPage("Dashboard",theme = shinytheme("slate"),
            ),
            
            
-           tabPanel("Criadores",
+           tabPanel("Criador",
                     fluidRow(
                       tags$style(HTML("
                     img {
                       border-radius: 50%;
                     }")),
-                      column(width = 6,uiOutput("img"),h2("Alessandro Pereira"),p("Graduando em Estatística da Universidade Federal do Rio Grande do Norte. Possui experiência em ciência de dados, principalmente na utilização da linguagem R. Usuário avançado do framework shiny, utilizado para a construção de dashboards.") ,p("GitHub:",a("https://github.com/AlessandroPTSN",   href="https://github.com/AlessandroPTSN"))),
-                      column(width = 6, uiOutput("img2"),h2("Felipe Sergio"),p(" Analista de TI focado em desenvolvimento de software, linguagens de programação e infraestrutura como código. Profissional com experiência comprovada nas áreas de administração de sistemas Linux,Gerenciamento de datacenter, técnico, consultoria e implantação de sistemas corporativos."),p("GitHub:",a("https://github.com/felipesergios",   href="https://github.com/felipesergios")))
+                      column(width = 12,uiOutput("img"),h2("Alessandro Pereira"),p("Graduando em Estatística da Universidade Federal do Rio Grande do Norte. Possui experiência em ciência de dados, principalmente na utilização da linguagem R. Usuário avançado do framework shiny, utilizado para a construção de dashboards.") ,p("GitHub:",a("https://github.com/AlessandroPTSN",   href="https://github.com/AlessandroPTSN"))),
+                      
                       
                     )
                     
