@@ -96,7 +96,7 @@ yyy2$Maximo = as.numeric(as.matrix(zzz2[4]))
 colnames(yyy2) <- c("Data","Abertura","Fechamento","Variacao","Minimo","Maximo")
 #yyy2 = yyy2[-20,]
 
-
+yyy[1,1]
 
 
 Ibo = read.csv("/app/Ibo.csv")
@@ -108,7 +108,7 @@ Ibo = Ibo %>% map_df(rev)
 Ibo = as.data.frame(Ibo)
 Ibo$Data=as.Date(Ibo$Data)
 j=1
-while((Ibo[m,1] != yyy[j,1])&(Ibo[m,4] != yyy[j,4])){
+while((Ibo[m,1] != yyy[j,1])&(Ibo[m,4] != yyy[j,4])&(j<20)){
   j=j+1
 }
 #Adiciona novas celulas
@@ -144,7 +144,7 @@ Ati$Data=as.Date(Ati$Data)
 tail(Ati)
 head(yyy2)
 j=1
-while((Ati[n,1] != yyy2[j,1])&(Ati[n,4] != yyy2[j,4])){
+while((Ati[n,1] != yyy2[j,1])&(Ati[n,4] != yyy2[j,4])&(j<20)){
   j=j+1
 }
 #Adiciona novas celulas
